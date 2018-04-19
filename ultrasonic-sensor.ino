@@ -59,7 +59,7 @@ void loop() {
 
 void requestEvent() {
 	for(int i = 0; i < sizeof(sensors)/sizeof(*sensors); i++){
-		Wire.write(byte);
+		Wire.write(results[i]);
 	}
 }
 
