@@ -29,7 +29,7 @@ void loop() {
 	for(int i = 0; i < sizeof(sensors)/sizeof(*sensors); i++){
 		if(sensors[i] == FRONT_SENSOR){
 			SharpIR sharp(sensors[i], 20150);
-			results[i] = sharp.distance();
+			results[i] = sharp.distance() * 0.3 + results[i] * 0.7;
 		} else {
 			digitalWrite(TRIG_PIN, LOW); 
 			delayMicroseconds(2); 
@@ -38,14 +38,12 @@ void loop() {
 			delayMicroseconds(10); 
 
 			digitalWrite(sensors[i], LOW);
-			result = pulseIn(sensors[i], HIGH);
+			result = pulseIn(sensors[i], HIGH) / 58.2;
 
-			result /= 58.2;
-
-			if(result < 40 && result != 0){
-				results[i] = result;
+			if(result < 40 && result > 0){
+				results[i] = result * 0.3 + results[i] * 0.7;
 			} else {
-				results[i] = 41;
+				/*results[i] = 41 * 0.3 + results[i] * 0.7;*/
 			}
 		}
 
