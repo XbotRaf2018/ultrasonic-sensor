@@ -1,4 +1,5 @@
 #include <SharpIR.h>
+#include <Wire.h>
 
 #define LEFT_SENSOR A0
 #define RIGHT_SENSOR A1
@@ -14,7 +15,7 @@ byte result;
 
 void setup() {
 	Serial.begin(115200);
-	Wire.begin();
+	Wire.begin(9);
 	Wire.onRequest(requestEvent);
 
 	pinMode(TRIG_PIN, OUTPUT);
